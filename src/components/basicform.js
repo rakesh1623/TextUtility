@@ -1,4 +1,5 @@
 import React ,{useState} from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Basicform(props) {
 
@@ -16,9 +17,13 @@ export default function Basicform(props) {
     }
     const copyToClipboard = ()=>{
         let copyText  = document.getElementById("exampleFormControlTextarea1");
-       // copyText.select();
-        //copyText.setSelectionRange(0,99999);
-        navigator.clipboard.writeText(copyText.value);
+        if(copyText.value.length<1){
+            toast.error("No text to copy");
+        }else{
+            navigator.clipboard.writeText(copyText.value);
+            toast.success('Copied Successfully');
+        }
+        
     }
     const removeSpaces = ()=>{
         let newText = text.replace(/\s+/g, ' ').trim();
@@ -33,6 +38,7 @@ export default function Basicform(props) {
     
     return (
         <>
+        <Toaster />
         <h1 className='mt-2'  style={{color:props.mode==='dark'?'white':'black'}}>{props.heading} </h1>
         <div className="mt-3">
             <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor:props.mode==='light'?'white':'black' , color:props.mode==='light'?'black':'white'}} id="exampleFormControlTextarea1" rows="14" ></textarea>

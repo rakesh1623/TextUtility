@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function navbar(props) {
+  
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary " data-bs-theme={props.mode}>
       <div className="container-fluid">
